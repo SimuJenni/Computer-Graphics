@@ -52,5 +52,5 @@ dependencies: \
   glm-0.9.2.7/glm/gtc/matrix_transform.hpp \
   glm-0.9.2.7/glm/gtc/../glm.hpp \
   glm-0.9.2.7/glm/gtc/matrix_transform.inl \
-  /Users/simujenni/Computer-Graphics/hw2-osx-10.9/variables.h \
-  /Users/simujenni/Computer-Graphics/hw2-osx-10.9/readfile.h
+  /Users/simujenni/Computer-Graphics/hw2-osx-10.9/readfile.h \
+  /Users/simujenni/Computer-Graphics/hw2-osx-10.9/variables.h

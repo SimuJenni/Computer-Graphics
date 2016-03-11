@@ -34,15 +34,14 @@ uniform float shininess;
 void main (void) 
 {       
     if (enablelighting) {       
-        vec4 finalcolor; 
-
+        vec4 finalcolor;
         // YOUR CODE FOR HW 2 HERE
         // A key part is implementation of the fragment shader
+        vec4 lighDir = normalize(myvertex - lightposn[0]);
+        float nDotL = dot(lighDir.xyz, mynormal);
+        finalcolor = ambient+nDotL*diffuse;
 
-        // Color all pixels black for now, remove this in your implementation!
-        finalcolor = vec4(0,0,0,1); 
-
-        gl_FragColor = finalcolor; 
+        gl_FragColor = finalcolor;
     } else {
         gl_FragColor = color; 
     }

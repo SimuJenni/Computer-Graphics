@@ -1,5 +1,4 @@
 dependencies: /Users/simujenni/Computer-Graphics/hw2-osx-10.9/main.cpp \
-  /Users/simujenni/Computer-Graphics/hw2-osx-10.9/shaders.h \
   /Users/simujenni/Computer-Graphics/hw2-osx-10.9/Transform.h \
   glm-0.9.2.7/glm/glm.hpp glm-0.9.2.7/glm/core/_fixes.hpp \
   glm-0.9.2.7/glm/core/setup.hpp glm-0.9.2.7/glm/./core/_detail.hpp \
@@ -51,7 +50,9 @@ dependencies: /Users/simujenni/Computer-Graphics/hw2-osx-10.9/main.cpp \
   glm-0.9.2.7/glm/core/func_noise.inl \
   glm-0.9.2.7/glm/gtc/matrix_transform.hpp \
   glm-0.9.2.7/glm/gtc/../glm.hpp \
-  glm-0.9.2.7/glm/gtc/matrix_transform.inl include/FreeImage.h \
+  glm-0.9.2.7/glm/gtc/matrix_transform.inl \
   /Users/simujenni/Computer-Graphics/hw2-osx-10.9/UCB/grader.h \
-  /Users/simujenni/Computer-Graphics/hw2-osx-10.9/variables.h \
-  /Users/simujenni/Computer-Graphics/hw2-osx-10.9/readfile.h
+  /Users/simujenni/Computer-Graphics/hw2-osx-10.9/shaders.h \
+  include/FreeImage.h \
+  /Users/simujenni/Computer-Graphics/hw2-osx-10.9/readfile.h \
+  /Users/simujenni/Computer-Graphics/hw2-osx-10.9/variables.h

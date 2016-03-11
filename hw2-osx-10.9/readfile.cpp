@@ -101,7 +101,11 @@ void readfile(const char *filename) {
               // Those arrays can then be used in display too.
               for (int i = 0; i < 4; i++) {
                 lightposn[numused * 4 + i] = values[i];
-                lightcolor[numused * 4 + 4 + i] = values[4 + i];
+                lightcolor[numused * 4 + i] = values[4 + i];
+              }
+              matransform(transfstack, values);
+              for (int i = 0; i < 4; i++) {
+                lightransf[numused * 4 + i] = values[i];
               }
               ++numused;
             }
@@ -164,7 +168,7 @@ void readfile(const char *filename) {
             eyeinit = vec3(values[0], values[1], values[2]);
             center = vec3(values[3], values[4], values[5]);
             up = Transform::upvector(vec3(values[6], values[7], values[8]),
-                                     vec3(0, 0, 1));
+                                     eyeinit - center);
             fovy = values[9];
           }
         }
@@ -214,6 +218,8 @@ void readfile(const char *filename) {
             // Think about how the transformation stack is affected
             // You might want to use helper functions on top of file.
             // Also keep in mind what order your matrix is!
+            mat4 m = Transform::translate(values[0], values[1], values[2]);
+            rightmultiply(m, transfstack);
           }
         } else if (cmd == "scale") {
           validinput = readvals(s, 3, values);
@@ -222,6 +228,8 @@ void readfile(const char *filename) {
             // Think about how the transformation stack is affected
             // You might want to use helper functions on top of file.
             // Also keep in mind what order your matrix is!
+            mat4 m = Transform::scale(values[0], values[1], values[2]);
+            rightmultiply(m, transfstack);
           }
         } else if (cmd == "rotate") {
           validinput = readvals(s, 4, values);
@@ -232,6 +240,10 @@ void readfile(const char *filename) {
             // See how the stack is affected, as above.
             // Note that rotate returns a mat3.
             // Also keep in mind what order your matrix is!
+            mat3 m = Transform::rotate(values[3],
+                                       vec3(values[0], values[1], values[2]));
+            mat4 rot = mat4(m);
+            rightmultiply(rot, transfstack);
           }
         }
 

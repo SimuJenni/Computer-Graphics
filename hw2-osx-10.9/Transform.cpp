@@ -6,15 +6,17 @@
 // See FAQ for more details or if you're having problems.
 
 #include "Transform.h"
+#include <assert.h>
 
 // Helper rotation function.  Please implement this.
 mat3 Transform::rotate(const float degrees, const vec3 &axis) {
   // YOUR CODE FOR HW2 HERE
   // Please implement this.  Likely the same as in HW 1.
+  vec3 normedAxis = glm::normalize(axis);
   float theta = degrees / 180 * pi;
-  float x = axis[0];
-  float y = axis[1];
-  float z = axis[2];
+  float x = normedAxis[0];
+  float y = normedAxis[1];
+  float z = normedAxis[2];
   mat3 m = mat3(cos(theta) + (1 - cos(theta)) * x * x,
                 (1 - cos(theta)) * x * y + sin(theta) * z,
                 (1 - cos(theta)) * x * z - sin(theta) * y,
@@ -24,6 +26,9 @@ mat3 Transform::rotate(const float degrees, const vec3 &axis) {
                 (1 - cos(theta)) * x * z + sin(theta) * y,
                 (1 - cos(theta)) * y * z - sin(theta) * x,
                 cos(theta) + (1 - cos(theta)) * z * z);
+  //  mat4 test;
+  //  glm::rotate(test, degrees, axis);
+  //  assert(m == mat3(test));
   return m;
 }
 
@@ -58,6 +63,7 @@ mat4 Transform::lookAt(const vec3 &eye, const vec3 &center, const vec3 &up) {
   mat4 m = mat4(u[0], u[1], u[2], -e_u, v[0], v[1], v[2], -e_v, w[0], w[1],
                 w[2], -e_w, 0, 0, 0, 1);
   m = glm::transpose(m);
+  //  assert(m == glm::lookAt(eye, center, up));
   return m;
 }
 
@@ -65,6 +71,13 @@ mat4 Transform::perspective(float fovy, float aspect, float zNear, float zFar) {
   mat4 ret;
   // YOUR CODE FOR HW2 HERE
   // New, to implement the perspective transform as well.
+  float fovRad = fovy * pi / 180;
+  float f = 1.0 / tan(fovRad / 2);
+  float A = (zFar + zNear) / (zNear - zFar);
+  float B = (2 * zFar * zNear) / (zNear - zFar);
+  ret = mat4(f / aspect, 0, 0, 0, 0, f, 0, 0, 0, 0, A, -1, 0, 0, B, 0);
+  //  mat4 test = glm::perspective(fovy, aspect, zNear, zFar);
+  //  assert(ret == test);
   return ret;
 }
 
@@ -72,6 +85,7 @@ mat4 Transform::scale(const float &sx, const float &sy, const float &sz) {
   mat4 ret;
   // YOUR CODE FOR HW2 HERE
   // Implement scaling
+  ret = mat4(sx, 0, 0, 0, 0, sy, 0, 0, 0, 0, sz, 0, 0, 0, 0, 1);
   return ret;
 }
 
@@ -79,6 +93,7 @@ mat4 Transform::translate(const float &tx, const float &ty, const float &tz) {
   mat4 ret;
   // YOUR CODE FOR HW2 HERE
   // Implement translation
+  ret = mat4(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, tx, ty, tz, 1);
   return ret;
 }
 
